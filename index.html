@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            let humanScore = 0;
+            let computerScore = 0;
+            function getComputerChoice(){
+                let value = Math.random();
+                if(value < 0.33)
+                {
+                    return "rock"
+                }
+                else if(value < 0.66)
+                {
+                    return "paper"
+                }
+                else{
+                    return "scissors"
+                }
+            }
+            function getHumanChoice(){
+                let choise = prompt("rock. paper. or scissors?");
+                return choise;
+            }
+            function playRound(humanChoice, computerChoice) {
+                humanLowerCase = humanChoice.toLowerCase()
+                computerLowerCase = computerChoice.toLowerCase()
+                switch(true){
+                    case(humanLowerCase === "rock" && computerLowerCase === "scissors"):
+                        humanScore++;
+                        return "You win! Rock beats scissors!";
+
+                    case(humanLowerCase === "rock" && computerLowerCase === "paper") :
+                        computerScore++;
+                        return "You lose! Paper beats rock!";
+                    case(humanLowerCase === "rock" && computerLowerCase === "rock"):
+                        return "It's a tie.";
+                    case (humanLowerCase === "paper" && computerLowerCase === "rock"):
+                        humanScore++;
+                        return "You win! Paper beats rock!";
+                    case( 
+                        humanLowerCase === "paper" && computerLowerCase === "paper"):
+                        return "It's a tie!";
+                    case ( 
+                        humanLowerCase === "paper" && computerLowerCase === "scissors"):
+                        computerScore++;
+                        return "You lose! Scissors beats paper"
+                    case(humanLowerCase === "scisssors" && computerLowerCase === "rock"):
+                        computerScore++;
+                        return "You lose! Rock beats scissors!"
+                    case(humanLowerCase === "scissors" && computerLowerCase === "paper"):
+                        humanScore++;
+                        return "You win! Scissors beats paper!"
+                    case (humanLowerCase === "scissors" && computerLowerCase === "scissors"):
+                        return "It's a tie!"
+
+                }
+            }
+
+           
+            function playGame(){
+                for(let i = 0; i < 5; i ++)
+                {
+                    let humanSelection = getHumanChoice();
+                    let computerSelection = getComputerChoice();
+                    playRound(humanSelection, computerSelection)
+                }
+                if(humanScore > computerScore)
+                {
+                    return "You win " + humanScore + "-" + computerScore + "!" ;
+                }
+                else if (humanScore < computerScore)
+                {
+                    return "You lose " + humanScore + "-" + computerScore + "!";
+                }
+
+            }
+            console.log(playGame());
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
