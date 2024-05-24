@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+    </head>
+    <body>
+        <div>Score: 
+            <div id="humanScore"> Human: 0 </div>    
+            <div id="computerScore">Computer: 0 </div>
+        </div>
+            <button id="btnOne" type="button">Rock</button>
+            <button id="btnTwo" type="button">Paper</button>
+            <button id="btnThree"type="button">Scissors</button>
+        
         <script>
             let humanScore = 0;
             let computerScore = 0;
@@ -58,27 +68,45 @@
             }
 
            
-            function playGame(){
-                for(let i = 0; i < 5; i ++)
+            const btnOne = document.querySelector("#btnOne");
+            
+            btnOne.addEventListener("click", () => {
+                playRound("rock", getComputerChoice())
+                changeScore()
+            });
+            const btnTwo = document.querySelector("#btnTwo");
+            
+            btnTwo.addEventListener("click", () => {
+                playRound("paper", getComputerChoice())
+                changeScore()
+            });
+            const btnThree = document.querySelector("#btnThree");
+            
+            btnThree.addEventListener("click", () => {
+                playRound("scissors", getComputerChoice())
+                changeScore()
+            });
+            function changeScore() {
+                const humanScoreDiv = document.querySelector("#humanScore");
+                const computerScoreDiv = document.querySelector("#computerScore");
+                humanScoreDiv.textContent = `Human: ${humanScore}` ;
+                computerScoreDiv.textContent = `Computer: ${computerScore}`;
+                const content = document.querySelector("body");
+                if(humanScore == 5)
                 {
-                    let humanSelection = getHumanChoice();
-                    let computerSelection = getComputerChoice();
-                    playRound(humanSelection, computerSelection)
+                    const humanWins = document.createElement("h1")
+                    humanWins.textContent = "Congradulations! You have won!"
+                    content.appendChild(humanWins)
                 }
-                if(humanScore > computerScore)
+                else if(computerScore == 5)
                 {
-                    return "You win " + humanScore + "-" + computerScore + "!" ;
+                    const computerWins = document.createElement("h1")
+                    computerWins.textContent = "Womp womp. You have lost!"
+                    content.appendChild(computerWins)
                 }
-                else if (humanScore < computerScore)
-                {
-                    return "You lose " + humanScore + "-" + computerScore + "!";
-                }
-
             }
-            console.log(playGame());
+            
         </script>
-    </head>
-    <body>
-
     </body>
+
 </html>
