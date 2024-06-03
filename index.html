@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <div>Score: 
+            <div id="humanScore"> Human: 0 </div>    
+            <div id="computerScore">Computer: 0 </div>
+        </div>
+            <button id="btnOne" type="button">Rock</button>
+            <button id="btnTwo" type="button">Paper</button>
+            <button id="btnThree"type="button">Scissors</button>
+        
+        <script>
+            let humanScore = 0;
+            let computerScore = 0;
+            function getComputerChoice(){
+                let value = Math.random();
+                if(value < 0.33)
+                {
+                    return "rock"
+                }
+                else if(value < 0.66)
+                {
+                    return "paper"
+                }
+                else{
+                    return "scissors"
+                }
+            }
+            function getHumanChoice(){
+                let choise = prompt("rock. paper. or scissors?");
+                return choise;
+            }
+            function playRound(humanChoice, computerChoice) {
+                humanLowerCase = humanChoice.toLowerCase()
+                computerLowerCase = computerChoice.toLowerCase()
+                switch(true){
+                    case(humanLowerCase === "rock" && computerLowerCase === "scissors"):
+                        humanScore++;
+                        return "You win! Rock beats scissors!";
+
+                    case(humanLowerCase === "rock" && computerLowerCase === "paper") :
+                        computerScore++;
+                        return "You lose! Paper beats rock!";
+                    case(humanLowerCase === "rock" && computerLowerCase === "rock"):
+                        return "It's a tie.";
+                    case (humanLowerCase === "paper" && computerLowerCase === "rock"):
+                        humanScore++;
+                        return "You win! Paper beats rock!";
+                    case( 
+                        humanLowerCase === "paper" && computerLowerCase === "paper"):
+                        return "It's a tie!";
+                    case ( 
+                        humanLowerCase === "paper" && computerLowerCase === "scissors"):
+                        computerScore++;
+                        return "You lose! Scissors beats paper"
+                    case(humanLowerCase === "scisssors" && computerLowerCase === "rock"):
+                        computerScore++;
+                        return "You lose! Rock beats scissors!"
+                    case(humanLowerCase === "scissors" && computerLowerCase === "paper"):
+                        humanScore++;
+                        return "You win! Scissors beats paper!"
+                    case (humanLowerCase === "scissors" && computerLowerCase === "scissors"):
+                        return "It's a tie!"
+
+                }
+            }
+
+           
+            const btnOne = document.querySelector("#btnOne");
+            
+            btnOne.addEventListener("click", () => {
+                playRound("rock", getComputerChoice())
+                changeScore()
+            });
+            const btnTwo = document.querySelector("#btnTwo");
+            
+            btnTwo.addEventListener("click", () => {
+                playRound("paper", getComputerChoice())
+                changeScore()
+            });
+            const btnThree = document.querySelector("#btnThree");
+            
+            btnThree.addEventListener("click", () => {
+                playRound("scissors", getComputerChoice())
+                changeScore()
+            });
+            function changeScore() {
+                const humanScoreDiv = document.querySelector("#humanScore");
+                const computerScoreDiv = document.querySelector("#computerScore");
+                humanScoreDiv.textContent = `Human: ${humanScore}` ;
+                computerScoreDiv.textContent = `Computer: ${computerScore}`;
+                const content = document.querySelector("body");
+                if(humanScore == 5)
+                {
+                    const humanWins = document.createElement("h1")
+                    humanWins.textContent = "Congradulations! You have won!"
+                    content.appendChild(humanWins)
+                }
+                else if(computerScore == 5)
+                {
+                    const computerWins = document.createElement("h1")
+                    computerWins.textContent = "Womp womp. You have lost!"
+                    content.appendChild(computerWins)
+                }
+            }
+            
+        </script>
+    </body>
+
+</html>
